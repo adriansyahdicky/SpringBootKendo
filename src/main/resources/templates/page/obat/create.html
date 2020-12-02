@@ -1,0 +1,67 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="obat-title"></h4>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal">
+
+            <input type="hidden" id="ObatId"/>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Name Obat</label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="nameObat" placeholder="Name Obat"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Katgeori</label>
+
+                <div class="col-sm-8">
+                    <select class="form-control select2" id="cboKategori" style="width: 100%;"></select>
+<!--                    <select class="form-control select2" id="satuan" style="width: 100%;">-->
+<!--                        <option value="">Please Selected</option>-->
+<!--                        <option value="Puyer">Puyer</option>-->
+<!--                        <option value="Tablet">Tablet</option>-->
+<!--                        <option value="Sirup">Sirup</option>-->
+<!--                    </select>-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Harga Jual</label>
+
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">Rp</span>
+                        <input type="text" class="form-control" id="hargaJual" placeholder="Harga Jual"/>
+                        <span class="input-group-addon">.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Harga Supplier</label>
+
+                <div class="col-sm-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">Rp</span>
+                        <input type="text" class="form-control" id="hargaSupplier" placeholder="Harga Supplier"/>
+                        <span class="input-group-addon">.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Qty</label>
+
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="qty" placeholder="Qty"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnSaveObat">Save changes</button>
+    </div>
+</div>

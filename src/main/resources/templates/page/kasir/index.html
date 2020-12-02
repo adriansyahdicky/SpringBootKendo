@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Kasir</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <section class="content">
+        <div class="row">
+
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Kasir</h3>
+                    </div>
+
+                    <div class="box-body">
+
+                        <div class="row">
+
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Tanggal</label>
+
+                                    <div class="col-sm-8">
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right" id="tanggal">
+                                            <b class="hidden" id="user_id" sec:authentication="principal.id">id</b>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <br/>
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label class="col-sm-2 control-label">Nama Obat</label>
+
+                                        <div class="col-sm-8">
+                                            <select class="form-control select2" id="cboObat" style="width: 100%;"></select>
+
+                                        </div>
+
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-primary" id="btnAdd">Add</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table id="tblKasir" class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th>Nama Obat</th>
+                                                <th>Qty</th>
+                                                <th>Harga</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </form>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+<div th:remove="tag" layout:fragment="footer-scripts">
+
+    <script type="text/javascript" src="/js/kasir.js?t=Date.Now()"></script>
+</div>
+</body>
+</html>
