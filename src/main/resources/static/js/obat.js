@@ -163,7 +163,6 @@ function findObatById(id){
             url:get_uri() + "/api/obat/getById/"+id,
             contentType:"application/json",
             success:function(data){
-                debugger;
                 var setKategoriName = data.kategori.nameKategori + " - " + data.kategori.satuan
                 $("#ObatId").val(data.id);
                 $("#nameObat").val(data.nameObat);

@@ -1,8 +1,10 @@
 package com.apotik.controller.api;
 
 import com.apotik.dto.KasirOrderDTO;
+import com.apotik.service.KasirService;
 import com.apotik.utils.ErrorUtils;
 import org.codehaus.jettison.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,23 +17,21 @@ import javax.validation.Valid;
 @RequestMapping(value = "/api/kasir")
 public class KasirOrderController {
 
+    @Autowired
+    private KasirService kasirService;
+
     @PostMapping(value = "/orders")
-    public String orders(@RequestBody @Valid KasirOrderDTO kategoriCreateDTO,
-                                 BindingResult bindingResult) throws Exception {
+    public String orders(@RequestBody KasirOrderDTO kasirOrderDTO) throws Exception {
 
         JSONObject jsonObject = new JSONObject();
-        if (bindingResult.hasErrors()){
-            return ErrorUtils.customErrors(bindingResult.getAllErrors());
-        }
-        else{
+
             try{
-                //kategoriService.SaveKategori(kategoriCreateDTO);
+                kasirService.SaveKasir(kasirOrderDTO);
                 jsonObject.put("status", "Success");
             }catch (Exception e){
                 throw new Exception(e.getMessage());
             }
             return jsonObject.toString();
-        }
 
     }
 

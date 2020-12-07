@@ -23,10 +23,10 @@ public class SupplierServiceImpl implements SupplierService{
     }
 
 
-//    @Override
-//    public Page<Supplier> getSuppliers(Pageable pageable) {
+    @Override
+    public Page<Supplier> getSuppliers(Pageable pageable) {
 //        List<String> d = new ArrayList<>();
 //        d.stream().skip(0).limit(20).collect(Collectors.toList());
-//        return supplierRepository.findAll(pageable);
-//    }
+        return supplierRepository.findAll(pageable);
+    }
 }

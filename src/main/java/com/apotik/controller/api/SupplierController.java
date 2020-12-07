@@ -24,27 +24,19 @@ public class SupplierController {
     private SupplierService supplierService;
 
     @PostMapping(value = "/getSuppliers")
-    public ResponseEntity<Map<String, Object>> getSuppliers(int pageSize,
-                                            int skip){
-
-        //Pageable paging = PageRequest.of(skip, pageSize);
+    public ResponseEntity<Map<String, Object>> getSuppliers(Pageable pageRequest){
 
         try{
-            //Page<Supplier> pageSupplier = supplierService.getSuppliers(paging);
-            List<Supplier> pageSupplier = supplierService.getSuppliers();
+            Page<Supplier> pageSupplierPakePaging = supplierService.getSuppliers(pageRequest);
+            System.out.println("data " + pageSupplierPakePaging.getContent());
+            System.out.println("totalElements " + pageSupplierPakePaging.getTotalElements());
 
-            List<Supplier> data_paging = pageSupplier.stream().skip(skip).limit(pageSize).collect(Collectors.toList());
+            //List<Supplier> pageSupplier = supplierService.getSuppliers();
+
+            //List<Supplier> data_paging = pageSupplier.stream().skip(skip).limit(pageSize).collect(Collectors.toList());
             Map<String, Object> response = new HashMap<>();
-            response.put("data", data_paging);
-            response.put("total_rows", pageSupplier.size());
-
-//            jsonObject.put("data", pageSupplier.getContent());
-//            jsonObject.put("total_rows", pageSupplier.getTotalPages());
-//            return jsonObject.toString();
-
-            //System.out.println();
-            //return jsonObject;
-            //return new JSONObject("data" = pageSupplier.getContent());
+            response.put("data", pageSupplierPakePaging.getContent());
+            response.put("total_rows", pageSupplierPakePaging.getTotalElements());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (Exception ex){
             throw new RuntimeException("error : "+ex.getMessage());

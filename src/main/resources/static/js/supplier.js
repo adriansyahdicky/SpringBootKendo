@@ -14,8 +14,24 @@ function GenerateGrid() {
                     dataType: "json",
                     type: "post"
                 },
+                 parameterMap: function (data) {
+                            // Mapping between Spring data pagination and kendo UI pagination parameters
+                            // Pagination
+                            var serverUrlParams = {
+                              // pagination
+                              size: data.pageSize,
+                              page: data.page = data.page - 1// as Spring page starts from 0
+                            };
+
+                            // Sorting
+                            if (data.sort && data.sort.length > 0)
+                              serverUrlParams.sort = data.sort[0].field + ',' + data.sort[0].dir;
+
+                            return serverUrlParams;
+                }
             },
             batch: true,
+            page: 0,
             pageSize: 20,
             serverPaging: true,
             schema: {
@@ -62,8 +78,6 @@ function GenerateGrid() {
                width: 150
             }],
             dataBound: function (e) {
-                var oke = "oke";
-                debugger;
             },
             dataBinding: function () {
                 No = (this.dataSource.page() - 1) * this.dataSource.pageSize();

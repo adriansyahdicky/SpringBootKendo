@@ -11,7 +11,10 @@ import java.util.List;
 @AllArgsConstructor
 public class KasirOrderDTO {
 
-    private OrderDTO orderDTO;
+    //private OrderDTO orderDTO;
+    private String tanggal;
+    private double price;
+    private Long userId;
     private List<OrderDetailDTO> orderDetailDTOS;
 
 }

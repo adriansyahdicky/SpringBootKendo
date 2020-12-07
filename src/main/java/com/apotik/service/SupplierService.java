@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SupplierService {
 
-    //Page<Supplier> getSuppliers(Pageable pageable);
+    Page<Supplier> getSuppliers(Pageable pageable);
     List<Supplier> getSuppliers();
 
 }

@@ -1,5 +1,9 @@
 package com.apotik.service;
 
-public interface KasirService {
+import com.apotik.dto.KasirOrderDTO;
 
+import java.text.ParseException;
+
+public interface KasirService {
+    void SaveKasir(KasirOrderDTO kasirOrderDTO) throws ParseException;
 }
