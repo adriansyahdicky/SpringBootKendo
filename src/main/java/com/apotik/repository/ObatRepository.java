@@ -1,6 +1,8 @@
 package com.apotik.repository;
 
 import com.apotik.entity.Obat;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +16,7 @@ public interface ObatRepository extends JpaRepository<Obat, Long> {
 
     @Query(value = "select * from obat where name_obat like %:name%", nativeQuery = true)
     List<Obat> findByObatByName(@Param("name") String name);
+
+    Page<Obat> findAll(Pageable pageable);
 
 }

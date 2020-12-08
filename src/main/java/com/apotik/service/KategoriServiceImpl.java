@@ -74,7 +74,7 @@ public class KategoriServiceImpl implements KategoriService{
         listkategori.forEach(kategori -> {
            ReturnSearch rs = new ReturnSearch();
            rs.setId(kategori.getId());
-           rs.setText(kategori.getNameKategori());
+           rs.setText(kategori.getNameKategori() + " - " + kategori.getSatuan());
            searchKategori.add(rs);
         });
 

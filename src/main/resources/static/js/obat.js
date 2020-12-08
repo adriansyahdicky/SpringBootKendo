@@ -93,7 +93,6 @@ $("#btnSaveObat").click(function(){
                         data:JSON.stringify(parameter),
                         contentType:"application/json",
                         success:function(data){
-                            debugger;
                             var obj = JSON.parse(data);
                             if(obj.status === "failure"){
                                 $.toast({
@@ -199,7 +198,6 @@ function deleteObat(id) {
                         var obj = JSON.parse(data);
                         swal("Message", obj.status, "success").then((value) => {
                             if (value) {
-                                 debugger;
                                  $("#tblObat").DataTable().ajax.reload();
                             }
                         });

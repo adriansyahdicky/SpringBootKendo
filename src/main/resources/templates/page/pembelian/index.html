@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Barang Keluar</title>
+    <title>Request Barang</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -15,7 +14,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Barang Keluar</h3>
+                        <h3 class="box-title">Request Barang</h3>
                     </div>
 
                     <div class="box-body">
@@ -31,10 +30,17 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="tanggal" disabled="disabled">
-                                            <b class="hidden" id="user_id" sec:authentication="principal.id">id</b>
+                                            <input type="text" class="form-control pull-right" id="tanggalrequest">
+
                                         </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Supplier</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control select2" id="cboSupplier" style="width: 100%;"></select>
+                                    </div>
+
                                 </div>
 
                                 <br/>
@@ -58,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <table id="itemKasir" class="table table-bordered table-hover">
+                                        <table id="itemPembelian" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
                                                 <th>Nama Obat</th>
@@ -68,15 +74,16 @@
                                             </tr>
                                             </thead>
                                             <tfoot>
-                                                <tr>
-                                                    <th colspan="1" style="text-align:right">Total:</th>
-                                                    <th colspan="2" style="text-align:center"><span id="sum"></span></th>
-                                                </tr>
+                                            <tr>
+                                                <th colspan="1" style="text-align:right">Total:</th>
+                                                <th colspan="2" style="text-align:center"><span id="sum"></span></th>
+                                            </tr>
                                             </tfoot>
                                         </table>
                                     </div>
 
                                 </div>
+
                                 <div class="col-sm-8">
                                     <button type="button" id="btnSimpan" class="btn btn-success">Simpan</button>
                                 </div>
@@ -95,7 +102,7 @@
 </div>
 <div th:remove="tag" layout:fragment="footer-scripts">
 
-    <script type="text/javascript" src="/js/kasir.js?t=Date.Now()"></script>
+    <script type="text/javascript" src="/js/pembelian.js?t=Date.Now()"></script>
 </div>
 </body>
 </html>

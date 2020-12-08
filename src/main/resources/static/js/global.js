@@ -17,8 +17,14 @@ function showTotalTransaksi(){
             contentType:"application/json",
             success:function(data){
                 var obj = JSON.parse(data);
-                var format_rp = formatRupiah(obj.total_transaksi);
-                $("#txtTotalTransaksi").text(format_rp);
+                if(obj.total_transaksi === null || obj.total_transaksi === "" || obj.total_transaksi === undefined){
+                    $("#txtTotalTransaksi").text(0);
+                }
+                else{
+                    var format_rp = formatRupiah(obj.total_transaksi);
+                    $("#txtTotalTransaksi").text(format_rp);
+                }
+
             }
         })
 }
@@ -35,3 +41,12 @@ function formatRupiah(angka){
             }
 			return rupiah;
 		}
+
+function ShowHideModal(modalName) {
+    if ($("#" + modalName + "").hasClass('in')) {
+
+        $("#" + modalName + "").modal('hide');
+    } else {
+        $("#" + modalName + "").modal('show');
+    }
+}

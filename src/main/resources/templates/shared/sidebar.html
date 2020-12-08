@@ -20,7 +20,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">APOTIK MENU</li>
-                <li><a href="#"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li><a th:href="@{'/dashboard'}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
                 <li class="treeview">
                     <a href="#">
@@ -33,11 +33,35 @@
                     <ul class="treeview-menu">
                         <li><a th:href="@{'/kategori'}"><i class="fa fa-circle-o"></i> Kategori</a></li>
                         <li><a th:href="@{'/obat'}"><i class="fa fa-circle-o"></i> Obat</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> User</a></li>
                         <li><a th:href="@{'/supplier'}"><i class="fa fa-circle-o"></i> Supplier</a></li>
                     </ul>
                 </li>
-                <li><a th:href="@{'/kasir'}"><i class="fa fa-edit"></i> <span>Kasir</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>Transaksi</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{'/requestbarang'}"><i class="fa fa-circle-o"></i>Request Barang</a></li>
+                        <li><a th:href="@{'/barangkeluarlist'}"><i class="fa fa-circle-o"></i>Barang Masuk</a></li>
+                        <li><a th:href="@{'/barangkeluar'}"><i class="fa fa-circle-o"></i> Barang Keluar</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-edit"></i>
+                        <span>Laporan</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a th:href="@{'/stockobat'}"><i class="fa fa-circle-o"></i>Laporan Stock Obat</a></li>
+                    </ul>
+                </li>
 
 
             </ul>

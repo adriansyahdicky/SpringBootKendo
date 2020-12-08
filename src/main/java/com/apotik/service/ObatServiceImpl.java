@@ -8,6 +8,8 @@ import com.apotik.entity.Obat;
 import com.apotik.exception.ResourceNotFoundException;
 import com.apotik.repository.ObatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,6 +24,11 @@ public class ObatServiceImpl implements ObatService{
     @Override
     public List<Obat> getObats() {
         return obatRepository.findAll();
+    }
+
+    @Override
+    public Page<Obat> getObatPages(Pageable pageable) {
+        return obatRepository.findAll(pageable);
     }
 
     @Override

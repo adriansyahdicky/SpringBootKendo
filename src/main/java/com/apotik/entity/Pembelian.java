@@ -1,5 +1,6 @@
 package com.apotik.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ public class Pembelian {
     private Long id;
 
     @Column(name = "tanggal")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Timestamp tanggal;
 
     @Column(name = "total_price")
@@ -28,5 +30,8 @@ public class Pembelian {
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
+
+    @Column(name = "status")
+    private String status;
 
 }

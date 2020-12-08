@@ -1,0 +1,47 @@
+<div class="modal fade" id="SupplierModals">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="supplier-title"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal formSupplier">
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label mandatory">Nama Supplier : </label>
+                            <div class="col-sm-4">
+                                <input id="txtNameSupplier" type="text" class="form-control" style="width:200px;" name="nameSupplier" data-bind="value: nameSupplier"  maxlength="30" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label mandatory">Telepon Supplier : </label>
+                            <div class="col-sm-4">
+                                <input id="txtTeleponSupplier" type="text" class="form-control" style="width:200px;" name="telepon" data-bind="value: telepon"  maxlength="12" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-fluid">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label mandatory">Alamat Supplier : </label>
+                            <div class="col-sm-4">
+                                <input id="txtAlamatSupplier" type="text" class="form-control" style="width:200px;" name="alamat" data-bind="value: alamat"  maxlength="100" autocomplete="off" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveSupplier" data-bind="click:saveMenu, text: isNew ? 'Save' : 'Update'">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+

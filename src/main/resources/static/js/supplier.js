@@ -55,7 +55,10 @@ function GenerateGrid() {
                 title: "No",
                 template: '<div align="center">#= ++No #</div>',
                 width: 50
-            }, {
+            },{
+                field: "id",
+                hidden: true
+            },{
                 field: "nameSupplier",
                 title: "Nama Supplier",
                 filterable: false,
@@ -84,4 +87,166 @@ function GenerateGrid() {
             }
         }).data("kendoGrid");
 
+}
+
+function clearForm(){
+    $("#txtNameSupplier").val("");
+    $("#txtTeleponSupplier").val("");
+    $("#alamat").val("");
+}
+
+function CreateSupplier(){
+        clearForm();
+        var viewModel = kendo.observable({
+            nameSupplier: $("#txtNameSupplier").val(),
+            telepon: $("#txtTeleponSupplier").val(),
+            alamat: $("#alamat").val(),
+            isNew: true,
+            saveMenu: function (e) {
+                e.preventDefault();
+                var data = kendo.observable({
+                    nameSupplier: this.nameSupplier,
+                    telepon: this.telepon,
+                    alamat: this.alamat,
+                    isNew: true,
+                });
+                saveSupplier(data);
+            }
+        });
+        kendo.bind($("#SupplierModals"), viewModel);
+        $("#supplier-title").text("Add Supplier");
+        ShowHideModal("SupplierModals");
+
+}
+
+function saveSupplier(data) {
+     $.ajax({
+                    type:"POST",
+                    url:get_uri() + "/api/supplier/createSupplier",
+                    data:JSON.stringify(data),
+                    contentType:"application/json",
+                    success:function(data){
+                        var obj = JSON.parse(data);
+                        if(obj.status === "failure"){
+                            $.toast({
+                                heading: 'Error',
+                                text: obj.message,
+                                position: 'top-right',
+                                stack: false,
+                                icon: 'error'
+                            })
+                        }
+                        else{
+                            $.toast({
+                                heading: 'Success',
+                                text: 'Data Supplier Berhasil Disimpan',
+                                position: 'top-right',
+                                stack: false,
+                                icon: 'success'
+                            })
+                            ShowHideModal("SupplierModals");
+                            $("#gvSupplier").data('kendoGrid').dataSource.read();
+                        }
+                    }
+                })
+
+}
+
+function EditSupplier(data) {
+    var kendoGrid = $("#gvSupplier").data("kendoGrid");
+    var dataItem = kendoGrid.dataItem($(data).closest("tr"));
+    var idSupplier = dataItem.id;
+
+    var viewModel = kendo.observable({
+        nameSupplier: dataItem.nameSupplier,
+        telepon: dataItem.telepon,
+        alamat: dataItem.alamat,
+        isNew: false,
+        saveMenu: function (e) {
+            e.preventDefault();
+            var data = kendo.observable({
+                nameSupplier: this.nameSupplier,
+                telepon: this.telepon,
+                alamat: this.alamat
+            });
+            updateSupplier(data, idSupplier);
+        }
+    });
+    kendo.bind($("#SupplierModals"), viewModel);
+    $("#supplier-title").text("Edit Supplier");
+    ShowHideModal("SupplierModals");
+}
+
+function updateSupplier(data, id){
+
+    $.ajax({
+                        type:"POST",
+                        url:get_uri() + "/api/supplier/updateSupplier/"+id,
+                        data:JSON.stringify(data),
+                        contentType:"application/json",
+                        success:function(data){
+                            var obj = JSON.parse(data);
+                            if(obj.status === "failure"){
+                                $.toast({
+                                    heading: 'Error',
+                                    text: obj.message,
+                                    position: 'top-right',
+                                    stack: false,
+                                    icon: 'error'
+                                })
+                            }
+                            else{
+                                $.toast({
+                                    heading: 'Success',
+                                    text: 'Data Supplier Berhasil Dirubah',
+                                    position: 'top-right',
+                                    stack: false,
+                                    icon: 'success'
+                                })
+                                ShowHideModal("SupplierModals");
+                                $("#gvSupplier").data('kendoGrid').dataSource.read();
+                            }
+                        }
+                    })
+
+}
+
+function DeleteSupplier(e) {
+    var dataItem = $("#gvSupplier").data('kendoGrid').dataItem($(e).closest("tr"));
+
+    var kendoWindow = $("<div />").kendoWindow({
+        title: "<span style='color: #000'> Confirmation</span>",
+        resizable: false,
+        width: 400,
+        modal: true
+    });
+    kendoWindow.data("kendoWindow").content($("#delete-confirmation").html()).center().open();
+    var labelText = kendoWindow.find(".delete-message");
+    labelText.text('Are you sure, that you want to delete Kategori "' + dataItem.nameSupplier + '" ?');
+    kendoWindow.find(".delete-confirm,.delete-cancel").click(function () {
+        if ($(this).hasClass("delete-confirm")) {
+
+            $.ajax({
+                                    type:"POST",
+                                    url:get_uri() + "/api/supplier/deleteSupplier/"+dataItem.id,
+                                    contentType:"application/json",
+                                    success:function(data){
+                                        var obj = JSON.parse(data);
+                                        if(obj.status === "Success"){
+                                            $("#gvSupplier").data('kendoGrid').dataSource.read();
+                                             $.toast({
+                                                 heading: 'Success',
+                                                 text: 'Data Supplier Berhasil Dihapus',
+                                                 position: 'top-right',
+                                                 stack: false,
+                                                 icon: 'success'
+                                             })
+                                        }
+
+                                    }
+                                })
+
+        }
+        kendoWindow.data("kendoWindow").close();
+    }).end();
 }
