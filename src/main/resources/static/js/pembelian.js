@@ -1,5 +1,7 @@
 var itemArray = [];
 var parameter;
+var parameterUpdate;
+
 $(document).ready(function() {
 
          var date = new Date();
@@ -12,11 +14,22 @@ $(document).ready(function() {
                          orderDetailDTOS: null
                  }
 
+         parameterUpdate = {
+            id_obat: null,
+            id_pembelian: null,
+            stok: null,
+            unite_price: null,
+            total_price: null,
+            keterangan: null
+         }
+
         $('#tanggalrequest').datepicker({
                     autoclose: true,
                     todayHighlight: true,
                     format: 'yyyy-mm-dd'
         });
+
+
 
         $( '#tanggalrequest' ).datepicker( 'setDate', today );
 
@@ -82,6 +95,28 @@ $(document).ready(function() {
                                 $("#row"+button_id+"").remove();
                                 calc_total();
                             });
+           $("#cboKategori").select2({
+                       placeholder: "-Selected Kategori-",
+                       minimumInputLength: 2,
+                       ajax:{
+                           url: get_uri() + '/api/kategori/searchKategoriByName',
+                           dataType: "json",
+                           type: "GET",
+                           delay: 250,
+                           data: function(params){
+                               return{
+                                   q:params.term,
+                               }
+                           },
+                           processResults:function(data){
+                               return{
+                                   results: data
+                               }
+                           },
+                           cache: true
+                       }
+                   });
+
            getPembelians();
 })
 
@@ -202,11 +237,11 @@ $("#btnSimpan").click(function(){
                                itemArray = [];
                                calc_total();
                                var supplierSelect = $('#cboSupplier');
-                                                                var option = new Option("", "", true, true);
-                                                                supplierSelect.append(option).trigger('change');
-                                                                supplierSelect.trigger({
-                                                                      type: 'select2:select'
-                                                                });
+                               var option = new Option("", "", true, true);
+                               supplierSelect.append(option).trigger('change');
+                               supplierSelect.trigger({
+                                    type: 'select2:select'
+                               });
                            }
                   }
               })
@@ -222,7 +257,7 @@ function getPembelians(){
             },
             "columns": [
                 { "data": "tanggal" },
-                { "data": "totalPrice" },
+                { "data": "totalPrice", render: $.fn.dataTable.render.number( ',', ',', 2, 'Rp' )},
                 { "data": "supplier.nameSupplier" },
                 { "data": "status" },
                 {
@@ -245,14 +280,18 @@ function findPembelianById(id){
                 url:get_uri() + "/api/pembelian/getReturnRequestPembelian/"+id,
                 contentType:"application/json",
                 success:function(data){
-                     $("#detailObat > tr").empty();
+                     $("#detailObat > tbody > tr").empty();
                      $("#txtTanggal").text(data.pembelian.tanggal);
                      $("#txtSupplier").text(data.pembelian.supplier.nameSupplier);
                      $("#txtTotal").text(formatRupiah(data.pembelian.totalPrice));
 
                     for(var i=0; i<data.pembelian_detail.length; i++){
+                        var keterangan_detail = "";
+                        if(data.pembelian_detail[i].keterangan != null){
+                            keterangan_detail = data.pembelian_detail[i].keterangan;
+                        }
+                        $("#detailObat > tbody:last-child").append("<tr> <td class='nama_obat'>"+data.pembelian_detail[i].obats.nameObat+"</td> <td class='qty_obat'><input id='qty_ok' type='number' min='1' value="+data.pembelian_detail[i].qty+" size='4'></input></td> <td class='harga_obat'>"+formatRupiah(data.pembelian_detail[i].unitPrice)+"</td> <td><textarea class='keterangan'>"+keterangan_detail+"</textarea></td> <td><button id='btn-"+data.pembelian_detail[i].obats.id+"' class='btn btn-primary' type='button' onclick='myFunction($(this), "+data.pembelian_detail[i].obats.id+", "+data.pembelian_detail[i].obats.hargaSupplier+", "+data.pembelian.id+")'>Hitung</button></td> </tr>");
 
-                        $("#detailObat").append("<tr> <td><span>"+data.pembelian_detail[i].obats.nameObat+"</span></td> <td><span>"+data.pembelian_detail[i].qty+"</span></td> <td><span >"+formatRupiah(data.pembelian_detail[i].unitPrice)+"</span></td> </tr>");
 
                     }
 
@@ -283,4 +322,200 @@ function Approved(id){
 
                 }
             })
+}
+
+$("#btnAddBarang").click(function(){
+    if($("#cboObat").val() === "" || $("#cboObat").val() === null){
+        $("#modal-obat").modal("show");
+        $("#obat-title").text("Create Obat");
+        clearForm();
+    }
+    else{
+        var id = parseInt($("#cboObat").val());
+        $.ajax({
+                    type:"GET",
+                    url:get_uri() + "/api/obat/getById/"+id,
+                    contentType:"application/json",
+                    success:function(data){
+                        var setKategoriName = data.kategori.nameKategori + " - " + data.kategori.satuan
+                        $("#ObatId").val(data.id);
+                        $("#nameObat").val(data.nameObat);
+                        $("#hargaJual").val(data.hargaJual);
+                        $("#hargaSupplier").val(data.hargaSupplier);
+                        $("#qty").val(data.qty);
+                        var kategoriSelect = $('#cboKategori');
+                        var option = new Option(setKategoriName, data.kategori.id, true, true);
+                        kategoriSelect.append(option).trigger('change');
+                        kategoriSelect.trigger({
+                            type: 'select2:select'
+                        });
+                        $("#obat-title").text("Update Obat");
+                        $("#modal-obat").modal("show");
+                    }
+                })
+    }
+
+})
+
+function clearForm(){
+    $("#ObatId").val("");
+    $("#nameObat").val("");
+    $("#hargaJual").val("");
+    $("#hargaSupplier").val("");
+    $("#qty").val("");
+    var kategoriSelect = $('#cboKategori');
+    var option = new Option("", "", true, true);
+    kategoriSelect.append(option).trigger('change');
+    kategoriSelect.trigger({
+       type: 'select2:select'
+    });
+    var obatSelect = $('#cboObat');
+        var option = new Option("", "", true, true);
+        obatSelect.append(option).trigger('change');
+        obatSelect.trigger({
+           type: 'select2:select'
+        });
+}
+
+$("#btnSaveObat").click(function(){
+       if($("#cboObat").val() === "" || $("#cboObat").val() === null){
+               //save
+
+               parameter.nameObat = $("#nameObat").val();
+               parameter.hargaJual = $("#hargaJual").val();
+               parameter.hargaSupplier = $("#hargaSupplier").val();
+               parameter.qty = $("#qty").val();
+               parameter.idKategori = $("#cboKategori").val();
+
+
+               $.ajax({
+                       type:"POST",
+                       url:get_uri() + "/api/obat/createObat",
+                       data:JSON.stringify(parameter),
+                       contentType:"application/json",
+                       success:function(data){
+                           var obj = JSON.parse(data);
+                           if(obj.status === "failure"){
+                               $.toast({
+                                   heading: 'Error',
+                                   text: obj.message,
+                                   position: 'top-right',
+                                   stack: false,
+                                   icon: 'error'
+                               })
+                           }
+                           else{
+                               $.toast({
+                                   heading: 'Success',
+                                   text: 'Data Barang Berhasil Disimpan',
+                                   position: 'top-right',
+                                   stack: false,
+                                   icon: 'success'
+                               })
+                               $("#modal-obat").modal("hide");
+                           }
+                       }
+                   })
+           }
+           else{
+               //edit
+                       parameter.id = $("#cboObat").val();
+                       parameter.nameObat = $("#nameObat").val();
+                       parameter.hargaJual = $("#hargaJual").val();
+                       parameter.hargaSupplier = $("#hargaSupplier").val();
+                       parameter.qty = $("#qty").val();
+                       parameter.idKategori = $("#cboKategori").val();
+
+
+                       $.ajax({
+                               type:"POST",
+                               url:get_uri() + "/api/obat/updateObat",
+                               data:JSON.stringify(parameter),
+                               contentType:"application/json",
+                               success:function(data){
+                                   var obj = JSON.parse(data);
+                                   if(obj.status === "failure"){
+                                       $.toast({
+                                           heading: 'Error',
+                                           text: obj.message,
+                                           position: 'top-right',
+                                           stack: false,
+                                           icon: 'error'
+                                       })
+                                       clearForm();
+                                   }
+                                   else{
+                                       $.toast({
+                                           heading: 'Success',
+                                           text: 'Data Barang Berhasil Dirubah',
+                                           position: 'top-right',
+                                           stack: false,
+                                           icon: 'success'
+                                       })
+                                       $("#modal-obat").modal("hide");
+                                   }
+                               }
+                           })
+
+           }
+
+})
+
+function calc_total_update(){
+  var sum = 0;
+  $(".harga_obat").each(function(){
+    var angka = $(this).text();
+    var hasil_replace = angka.replace(/,/g, '');
+    sum += parseFloat(hasil_replace);
+  });
+  $('#txtTotal').text(formatRupiah(sum));
+}
+
+
+function myFunction(e, id_obat, harga_supplier, id_pembelian){
+     var qty_obat = e.closest("tr").find("td:eq(1) input[type='number']").val();
+     var keterangan = e.closest("tr").find("td:eq(3) input[type='text']").val();
+     var hasil = parseInt(qty_obat) * harga_supplier;
+
+     e.closest("tr").find(".harga_obat").text(formatRupiah(hasil));
+     calc_total_update();
+
+     parameterUpdate.id_obat = parseInt(id_obat);
+     parameterUpdate.id_pembelian = parseInt(id_pembelian);
+     parameterUpdate.stok = parseInt(qty_obat);
+     parameterUpdate.unite_price = parseFloat(hasil);
+     var replace_total = $('#txtTotal').text().replace(/,/g, '');
+     parameterUpdate.total_price = parseFloat(replace_total);
+     parameterUpdate.keterangan = keterangan;
+
+
+                    $.ajax({
+                            type:"POST",
+                            url:get_uri() + "/api/pembelian/updatedetail",
+                            data:JSON.stringify(parameterUpdate),
+                            contentType:"application/json",
+                            success:function(data){
+                                var obj = JSON.parse(data);
+                                if(obj.status === "failure"){
+                                    $.toast({
+                                        heading: 'Error',
+                                        text: obj.message,
+                                        position: 'top-right',
+                                        stack: false,
+                                        icon: 'error'
+                                    });
+                                }
+                                else{
+                                    $.toast({
+                                        heading: 'Success',
+                                        text: 'Data Pembelian Berhasil Diupdate',
+                                        position: 'top-right',
+                                        stack: false,
+                                        icon: 'success'
+                                    });
+                                    $("#tblRequestBarangKeluar").DataTable().ajax.reload();
+                                }
+                            }
+                        })
+
 }

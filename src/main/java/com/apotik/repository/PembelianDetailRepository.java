@@ -14,4 +14,7 @@ public interface PembelianDetailRepository extends JpaRepository<PembelianDetail
     @Query(value = "select * from pembelian_detail pd where pd.pembelian_id=:idpembelian", nativeQuery = true)
     public List<PembelianDetail> findByPembelianId(@Param("idpembelian") Long idpembelian);
 
+    @Query(value = "select * from pembelian_detail pd where pd.pembelian_id=:idpembelian and pd.obat_id=:idobat", nativeQuery = true)
+    public  PembelianDetail findByPembelianIdAndObatId(@Param("idpembelian") Long idpembelian, @Param("idobat") Long idobat);
+
 }

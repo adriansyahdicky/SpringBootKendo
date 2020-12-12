@@ -52,7 +52,9 @@
 
                                         <div class="col-sm-8">
                                             <select class="form-control select2" id="cboObat" style="width: 100%;"></select>
-
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button type="button" class="btn btn-primary" id="btnAddBarang">Add or Edit</button>
                                         </div>
                                         <br/><br/>
                                         <div class="col-sm-8">
@@ -60,7 +62,7 @@
                                         </div>
 
                                         <div class="col-sm-2">
-                                            <button type="button" class="btn btn-primary" id="btnAdd">Add</button>
+                                            <button type="button" class="btn btn-primary" id="btnAdd">Add Item</button>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -98,6 +100,11 @@
         </div>
     </section>
 
+    <div class="modal fade" id="modal-obat" data-backdrop="static" >
+        <div class="modal-dialog">
+            <th:block th:include="/page/obat/create"></th:block>
+        </div>
+    </div>
 
 </div>
 <div th:remove="tag" layout:fragment="footer-scripts">

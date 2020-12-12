@@ -15,6 +15,10 @@ public class PembelianDetail {
 
     @Column(name = "qty")
     private int qty;
+    @Column(name = "qty_retur", nullable = false, columnDefinition = "integer default 0")
+    private Integer qtyRetur;
+    @Column(name = "keterangan")
+    private String keterangan;
     @Column(name = "unit_price")
     private double unitPrice;
     @ManyToOne(cascade = CascadeType.ALL)

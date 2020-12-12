@@ -1,6 +1,7 @@
 package com.apotik.controller.api;
 
 import com.apotik.dto.PembelianDTO;
+import com.apotik.dto.PembelianDetailUpdateDTO;
 import com.apotik.dto.ReturnRequestPembelian;
 import com.apotik.entity.Pembelian;
 import com.apotik.entity.Supplier;
@@ -54,6 +55,21 @@ public class PembelianController {
 
         try{
             pembelianService.RequestBarang(pembelianDTO);
+            jsonObject.put("status", "Success");
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+        return jsonObject.toString();
+
+    }
+
+    @PostMapping(value = "/updatedetail")
+    public String updatedetail(@RequestBody PembelianDetailUpdateDTO pembelianDetailUpdateDTO) throws Exception {
+
+        JSONObject jsonObject = new JSONObject();
+
+        try{
+            pembelianService.Update(pembelianDetailUpdateDTO);
             jsonObject.put("status", "Success");
         }catch (Exception e){
             throw new Exception(e.getMessage());

@@ -26,7 +26,7 @@ public class ObatUpdateDTO {
     private Double hargaSupplier;
 
     @JsonProperty
-    @Min(message = "Jumlah Barang Minimum Harus 1", value = 1)
+    @Min(message = "Jumlah Barang Minimum Harus 0", value = 0)
     @NotNull(message = "Qty Tidak Boleh Kosong")
     private int qty;
 

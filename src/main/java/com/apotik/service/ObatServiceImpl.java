@@ -88,7 +88,7 @@ public class ObatServiceImpl implements ObatService{
         for(Obat o : listObat){
             ReturnSearch returnSearch = new ReturnSearch();
             returnSearch.setId(o.getId());
-            returnSearch.setText(o.getNameObat() + " - " + o.getKategori().getNameKategori() + " - " + o.getKategori().getSatuan());
+            returnSearch.setText(o.getNameObat() + " - " + o.getKategori().getNameKategori() + " - Harga : " + o.getHargaSupplier());
             searchObat.add(returnSearch);
         }
 

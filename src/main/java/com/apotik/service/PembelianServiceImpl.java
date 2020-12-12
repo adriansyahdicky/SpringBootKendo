@@ -1,6 +1,7 @@
 package com.apotik.service;
 
 import com.apotik.dto.PembelianDTO;
+import com.apotik.dto.PembelianDetailUpdateDTO;
 import com.apotik.dto.ReturnRequestPembelian;
 import com.apotik.entity.*;
 import com.apotik.repository.ObatRepository;
@@ -80,6 +81,24 @@ public class PembelianServiceImpl implements PembelianService{
     }
 
     @Override
+    public void Update(PembelianDetailUpdateDTO pembelianDetailUpdateDTO) throws ParseException {
+        //update total price
+        Pembelian pembelian = pembelianRepository.findById(pembelianDetailUpdateDTO.getId_pembelian()).get();
+        pembelian.setTotalPrice(pembelianDetailUpdateDTO.getTotal_price());
+        pembelianRepository.save(pembelian);
+
+        //update stok and unitprice
+        PembelianDetail pembelianDetail = pembelianDetailRepository.
+                findByPembelianIdAndObatId(pembelianDetailUpdateDTO.getId_pembelian(), pembelianDetailUpdateDTO.getId_obat());
+        pembelianDetail.setQtyRetur(pembelianDetail.getQty() - pembelianDetailUpdateDTO.getStok());
+        pembelianDetail.setQty(pembelianDetailUpdateDTO.getStok());
+        pembelianDetail.setUnitPrice(pembelianDetailUpdateDTO.getUnite_price());
+        pembelianDetail.setKeterangan(pembelianDetailUpdateDTO.getKeterangan());
+
+        pembelianDetailRepository.save(pembelianDetail);
+    }
+
+    @Override
     public List<Pembelian> getPembelians() {
         return pembelianRepository.findAll();
     }
@@ -98,6 +117,7 @@ public class PembelianServiceImpl implements PembelianService{
             pembelianDetail.setUnitPrice(pembelianDetails.get(i).getUnitPrice());
             Obat obat = obatRepository.findById(pembelianDetails.get(i).getPembelianDetail_pk().getObatId()).get();
             pembelianDetail.setObats(obat);
+            pembelianDetail.setKeterangan(pembelianDetails.get(i).getKeterangan());
             tampungData.add(pembelianDetail);
         }
         rp.setPembelianDetails(tampungData);
