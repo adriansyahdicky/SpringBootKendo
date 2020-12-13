@@ -22,4 +22,11 @@ public class PembelianViewController {
         return view;
     }
 
+    @RequestMapping(value = "/laporanbarangmasuklist", method = RequestMethod.GET)
+    public ModelAndView laporanbarangmasuklist(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("page/pembelian/laporanbarangmasuklist");
+        return view;
+    }
+
 }

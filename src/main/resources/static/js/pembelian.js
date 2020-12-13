@@ -291,8 +291,6 @@ function findPembelianById(id){
                             keterangan_detail = data.pembelian_detail[i].keterangan;
                         }
                         $("#detailObat > tbody:last-child").append("<tr> <td class='nama_obat'>"+data.pembelian_detail[i].obats.nameObat+"</td> <td class='qty_obat'><input id='qty_ok' type='number' min='1' value="+data.pembelian_detail[i].qty+" size='4'></input></td> <td class='harga_obat'>"+formatRupiah(data.pembelian_detail[i].unitPrice)+"</td> <td><textarea class='keterangan'>"+keterangan_detail+"</textarea></td> <td><button id='btn-"+data.pembelian_detail[i].obats.id+"' class='btn btn-primary' type='button' onclick='myFunction($(this), "+data.pembelian_detail[i].obats.id+", "+data.pembelian_detail[i].obats.hargaSupplier+", "+data.pembelian.id+")'>Hitung</button></td> </tr>");
-
-
                     }
 
                     $("#modal-detail").modal("show");

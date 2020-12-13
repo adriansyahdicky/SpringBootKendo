@@ -3,12 +3,15 @@ package com.apotik.service;
 import com.apotik.dto.PembelianDTO;
 import com.apotik.dto.PembelianDetailUpdateDTO;
 import com.apotik.dto.ReturnRequestPembelian;
+import com.apotik.dto.SearchByDateDTO;
 import com.apotik.entity.*;
 import com.apotik.repository.ObatRepository;
 import com.apotik.repository.PembelianDetailRepository;
 import com.apotik.repository.PembelianRepository;
 import com.apotik.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -123,5 +126,10 @@ public class PembelianServiceImpl implements PembelianService{
         rp.setPembelianDetails(tampungData);
 
         return rp;
+    }
+
+    @Override
+    public Page<Pembelian> reportPembelian(Pageable pageable, String tglMasuk, String tglKeluar) {
+        return pembelianRepository.findBytanggal(pageable, tglMasuk, tglKeluar);
     }
 }

@@ -35,4 +35,8 @@ public class Obat {
     @JoinColumn(name = "kategori_id", nullable = false)
     private Kategori kategori;
 
+    @ManyToOne
+    @JoinColumn(name = "rak_id", nullable = false)
+    private Rak rak;
+
 }

@@ -15,4 +15,11 @@ public class KasirViewController {
         return view;
     }
 
+    @RequestMapping(value = "/laporanbarangkeluarlist", method = RequestMethod.GET)
+    public ModelAndView laporanbarangkeluarlist(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("page/kasir/laporanbarangkeluar");
+        return view;
+    }
+
 }

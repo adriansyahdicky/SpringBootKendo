@@ -9,7 +9,8 @@ $(document).ready(function () {
              hargaJual : null,
              hargaSupplier : null,
              qty : null,
-             idKategori : null
+             idKategori : null,
+             idRak: null
         }
 
         $("#cboKategori").select2({
@@ -33,6 +34,28 @@ $(document).ready(function () {
                 cache: true
             }
         });
+
+        $("#cboRak").select2({
+                    placeholder: "-Selected Rak-",
+                    minimumInputLength: 2,
+                    ajax:{
+                        url: get_uri() + '/api/rak/searchRakByName',
+                        dataType: "json",
+                        type: "GET",
+                        delay: 250,
+                        data: function(params){
+                            return{
+                                q:params.term,
+                            }
+                        },
+                        processResults:function(data){
+                            return{
+                                results: data
+                            }
+                        },
+                        cache: true
+                    }
+                });
 })
 
 $("#btnSaveObat").click(function(){
@@ -44,6 +67,7 @@ $("#btnSaveObat").click(function(){
         parameter.hargaSupplier = $("#hargaSupplier").val();
         parameter.qty = $("#qty").val();
         parameter.idKategori = $("#cboKategori").val();
+        parameter.idRak = $("#cboRak").val();
 
 
         $.ajax({
@@ -52,7 +76,6 @@ $("#btnSaveObat").click(function(){
                 data:JSON.stringify(parameter),
                 contentType:"application/json",
                 success:function(data){
-                    debugger;
                     var obj = JSON.parse(data);
                     if(obj.status === "failure"){
                         $.toast({
@@ -85,6 +108,7 @@ $("#btnSaveObat").click(function(){
                 parameter.hargaSupplier = $("#hargaSupplier").val();
                 parameter.qty = $("#qty").val();
                 parameter.idKategori = $("#cboKategori").val();
+                parameter.idRak = $("#cboRak").val();
 
 
                 $.ajax({
@@ -135,6 +159,7 @@ function getObats(){
                 { "data": "hargaSupplier" },
                 { "data": "qty" },
                 { "data": "kategori.nameKategori" },
+                { "data": "rak.nameRak" },
                 { "data": "kategori.satuan" },
                 {
                    "data": 'id',
@@ -152,7 +177,7 @@ function getObats(){
 
 $("#addObat").click(function(){
     $("#modal-obat").modal("show");
-    $("#obat-title").text("Create Obat");
+    $("#obat-title").text("Create Barang");
     clearForm();
 })
 
@@ -162,7 +187,8 @@ function findObatById(id){
             url:get_uri() + "/api/obat/getById/"+id,
             contentType:"application/json",
             success:function(data){
-                var setKategoriName = data.kategori.nameKategori + " - " + data.kategori.satuan
+                var setKategoriName = data.kategori.nameKategori + " - " + data.kategori.satuan;
+                var setRakName = data.rak.nameRak;
                 $("#ObatId").val(data.id);
                 $("#nameObat").val(data.nameObat);
                 $("#hargaJual").val(data.hargaJual);
@@ -174,7 +200,14 @@ function findObatById(id){
                 kategoriSelect.trigger({
                     type: 'select2:select'
                 });
-                $("#obat-title").text("Update Obat");
+
+                var rakSelect = $('#cboRak');
+                                var option = new Option(setRakName, data.rak.id, true, true);
+                                rakSelect.append(option).trigger('change');
+                                rakSelect.trigger({
+                                    type: 'select2:select'
+                                });
+                $("#obat-title").text("Update Barang");
                 $("#modal-obat").modal("show");
             }
         })
@@ -183,7 +216,7 @@ function findObatById(id){
 function deleteObat(id) {
     swal({
         title: "Are you sure?",
-        text: "Deleted Obat !",
+        text: "Deleted Barang !",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -219,4 +252,10 @@ function clearForm(){
     kategoriSelect.trigger({
        type: 'select2:select'
     });
+    var rakSelect = $('#cboRak');
+        var option = new Option("", "", true, true);
+        rakSelect.append(option).trigger('change');
+        rakSelect.trigger({
+           type: 'select2:select'
+        });
 }

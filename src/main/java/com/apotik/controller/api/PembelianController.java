@@ -3,12 +3,14 @@ package com.apotik.controller.api;
 import com.apotik.dto.PembelianDTO;
 import com.apotik.dto.PembelianDetailUpdateDTO;
 import com.apotik.dto.ReturnRequestPembelian;
+import com.apotik.dto.SearchByDateDTO;
 import com.apotik.entity.Pembelian;
 import com.apotik.entity.Supplier;
 import com.apotik.service.PembelianService;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -93,6 +95,21 @@ public class PembelianController {
 
     }
 
+    @PostMapping(value = "/laporanbarangmasuk/{tglMasuk}/{tglKeluar}")
+    public ResponseEntity<Map<String, Object>> laporanbarangmasuk(@PathVariable("tglMasuk") String tglMasuk, @PathVariable("tglKeluar") String tglKeluar, Pageable pageRequest){
+
+        try{
+            Page<Pembelian> pembelianPage = pembelianService.reportPembelian(pageRequest, tglMasuk, tglKeluar);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("data", pembelianPage.getContent());
+            response.put("total_rows", pembelianPage.getTotalElements());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }catch (Exception ex){
+            throw new RuntimeException("error : "+ex.getMessage());
+        }
+
+    }
 
 
 }

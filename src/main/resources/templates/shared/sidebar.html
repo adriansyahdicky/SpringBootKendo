@@ -20,7 +20,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">APOTIK MENU</li>
-                <li><a th:href="@{'/dashboard'}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li><a th:href="@{'/dashboard'}"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
 
                 <li class="treeview">
                     <a href="#">
@@ -32,8 +32,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a th:href="@{'/kategori'}"><i class="fa fa-circle-o"></i> Kategori</a></li>
-                        <li><a th:href="@{'/obat'}"><i class="fa fa-circle-o"></i> Obat</a></li>
+                        <li><a th:href="@{'/obat'}"><i class="fa fa-circle-o"></i> Barang</a></li>
                         <li><a th:href="@{'/supplier'}"><i class="fa fa-circle-o"></i> Supplier</a></li>
+                        <li><a th:href="@{'/rak'}"><i class="fa fa-circle-o"></i> Lokasi</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -59,7 +60,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{'/stockobat'}"><i class="fa fa-circle-o"></i>Laporan Stock Obat</a></li>
+                        <li><a th:href="@{'/stockobat'}"><i class="fa fa-circle-o"></i>Laporan Stock Barang</a></li>
+                        <li><a th:href="@{'/laporanbarangmasuklist'}"><i class="fa fa-circle-o"></i>Laporan Barang Masuk</a></li>
+                        <li><a th:href="@{'/laporanbarangkeluarlist'}"><i class="fa fa-circle-o"></i>Laporan Barang Keluar</a></li>
                     </ul>
                 </li>
 

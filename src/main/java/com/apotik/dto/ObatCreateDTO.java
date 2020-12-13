@@ -31,4 +31,7 @@ public class ObatCreateDTO {
     @NotNull(message = "Kategori Belum Dipilih")
     private Long idKategori;
 
+    @NotNull(message = "Lokasi Belum Dipilih")
+    private Long idRak;
+
 }

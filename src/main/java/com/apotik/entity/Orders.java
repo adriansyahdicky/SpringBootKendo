@@ -1,5 +1,6 @@
 package com.apotik.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Orders {
     private Long id;
 
     @Column(name = "tanggal")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Timestamp tanggal;
 
     @Column(name = "total_price")

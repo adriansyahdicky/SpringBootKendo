@@ -5,6 +5,7 @@ import com.apotik.dto.ObatUpdateDTO;
 import com.apotik.dto.ReturnSearch;
 import com.apotik.entity.Kategori;
 import com.apotik.entity.Obat;
+import com.apotik.entity.Rak;
 import com.apotik.exception.ResourceNotFoundException;
 import com.apotik.repository.ObatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,10 @@ public class ObatServiceImpl implements ObatService{
 
         Kategori kategori = new Kategori();
         kategori.setId(obatCreateDTO.getIdKategori());
+
+        Rak rak = new Rak();
+        rak.setId(obatCreateDTO.getIdRak());
+
         Obat obat =
                 Obat.builder()
                         .nameObat(obatCreateDTO.getNameObat())
@@ -50,6 +55,7 @@ public class ObatServiceImpl implements ObatService{
                         .hargaJual(obatCreateDTO.getHargaJual())
                         .hargaSupplier(obatCreateDTO.getHargaSupplier())
                         .kategori(kategori)
+                        .rak(rak)
                         .build();
         obatRepository.save(obat);
     }
@@ -62,11 +68,15 @@ public class ObatServiceImpl implements ObatService{
         Kategori kategori = new Kategori();
         kategori.setId(obatUpdateDTO.getIdKategori());
 
+        Rak rak = new Rak();
+        rak.setId(obatUpdateDTO.getIdRak());
+
         obat.setNameObat(obatUpdateDTO.getNameObat());
         obat.setHargaJual(obatUpdateDTO.getHargaJual());
         obat.setHargaSupplier(obatUpdateDTO.getHargaSupplier());
         obat.setQty(obatUpdateDTO.getQty());
         obat.setKategori(kategori);
+        obat.setRak(rak);
         obatRepository.save(obat);
     }
 
@@ -88,7 +98,7 @@ public class ObatServiceImpl implements ObatService{
         for(Obat o : listObat){
             ReturnSearch returnSearch = new ReturnSearch();
             returnSearch.setId(o.getId());
-            returnSearch.setText(o.getNameObat() + " - " + o.getKategori().getNameKategori() + " - Harga : " + o.getHargaSupplier());
+            returnSearch.setText(o.getNameObat() + " - " + o.getKategori().getNameKategori() + " - Harga : " + o.getHargaSupplier() + "- Lokasi " + o.getRak().getNameRak());
             searchObat.add(returnSearch);
         }
 

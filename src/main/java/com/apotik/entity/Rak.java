@@ -10,17 +10,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "kategori")
-public class Kategori {
+@Table(name = "rak")
+public class Rak {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name_kategori")
-    private String nameKategori;
-
-    @Column(name = "satuan")
-    private String satuan;
+    @Column(name = "name_rak")
+    private String nameRak;
 
 }
