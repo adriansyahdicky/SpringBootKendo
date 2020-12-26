@@ -76,6 +76,28 @@ $(document).ready(function() {
                           }
                       });
 
+                      $("#cboRak").select2({
+                                          placeholder: "-Selected Rak-",
+                                          minimumInputLength: 2,
+                                          ajax:{
+                                              url: get_uri() + '/api/rak/searchRakByName',
+                                              dataType: "json",
+                                              type: "GET",
+                                              delay: 250,
+                                              data: function(params){
+                                                  return{
+                                                      q:params.term,
+                                                  }
+                                              },
+                                              processResults:function(data){
+                                                  return{
+                                                      results: data
+                                                  }
+                                              },
+                                              cache: true
+                                          }
+                                      });
+
                       $(document).on('click', '.btn-remove', function(){
                                 var button_id = $(this).attr("id");
                                 var index = -1;
