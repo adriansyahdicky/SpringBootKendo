@@ -60,6 +60,7 @@ public class PembelianServiceImpl implements PembelianService{
             pembelianDetail.setPembelianDetail_pk(pembelianDetail_pk);
             pembelianDetail.setPembelian(pembelian);
             pembelianDetail.setObats(obat);
+            pembelianDetail.setQtyRetur(0);
             pembelianDetail.setQty(pembelianDTO.getOrderDetailDTOS().get(i).getQty());
             pembelianDetail.setUnitPrice(pembelianDTO.getOrderDetailDTOS().get(i).getUnitPrice());
 
