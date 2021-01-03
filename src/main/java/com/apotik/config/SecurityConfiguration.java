@@ -18,6 +18,11 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
 
     @Autowired
     private UserService userService;
+    
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider());
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
@@ -61,6 +66,12 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter{
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**", "/static/**", "/bower_components/**", "/build/**", "/dist/**", "/plugins/**", "/css/**", "/img/**");
+    }
+    
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
     }
 
 }
