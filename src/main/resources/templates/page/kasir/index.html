@@ -5,7 +5,7 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Barang Keluar</title>
+    <title>Kasir</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -15,7 +15,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Barang Keluar</h3>
+                        <h3 class="box-title">Kasir</h3>
                     </div>
 
                     <div class="box-body">
@@ -36,13 +36,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Metode Pembayaran</label>
+                                    <div class="col-sm-8">
+                                        <select class="form-control" id="cboMetode" style="width: 100%;">
+                                            <option value="">--Selected Metode Pembayaran--</option>
+                                            <option value="CASH">CASH</option>
+                                            <option value="OVO">OVO</option>
+                                            <option value="GOPAY">GOPAY</option>
+                                            <option value="SHOPAY">SHOPEE PAY</option>
+                                        </select>
+                                    </div>
+
+                                </div>
 
                                 <br/>
                                 <br/>
 
                                 <div class="form-group">
                                     <div class="col-md-6">
-                                        <label class="col-sm-2 control-label">Nama Obat</label>
+                                        <label class="col-sm-2 control-label">Nama Menu</label>
 
                                         <div class="col-sm-8">
                                             <select class="form-control select2" id="cboObat" style="width: 100%;"></select>
@@ -61,7 +74,7 @@
                                         <table id="itemKasir" class="table table-bordered table-hover">
                                             <thead>
                                             <tr>
-                                                <th>Nama Obat</th>
+                                                <th>Menu</th>
                                                 <th>Qty</th>
                                                 <th>Harga</th>
                                                 <th>Batal</th>

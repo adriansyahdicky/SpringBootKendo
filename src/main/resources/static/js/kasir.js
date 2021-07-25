@@ -10,6 +10,7 @@ $(document).ready(function () {
                 tanggal : null,
                 price : null,
                 userId : null,
+                metodePembayaran: null,
                 orderDetailDTOS: null
         }
 
@@ -22,7 +23,7 @@ $(document).ready(function () {
       $( '#tanggal' ).datepicker( 'setDate', today );
 
       $("#cboObat").select2({
-                  placeholder: "-Selected Obat-",
+                  placeholder: "-Selected Menu-",
                   minimumInputLength: 2,
                   ajax:{
                       url: get_uri() + '/api/obat/searchObatByName',
@@ -137,10 +138,14 @@ $("#btnSimpan").click(function(){
     if(itemArray.length === 0){
         alert("Silahkan Isi Item Obat Terlebih Dahulu !");
     }
+    else if($("#cboMetode").val() === ""){
+        alert("Harap memilih metode pembayaran anda !");
+    }
     else{
         parameter.tanggal = $("#tanggal").val();
         parameter.price = parseFloat($("#sum").text());
         parameter.userId = parseInt($("#user_id").text());
+        parameter.metodePembayaran = $("#cboMetode").val();
         parameter.orderDetailDTOS = itemArray;
 
         $.ajax({
@@ -159,6 +164,7 @@ $("#btnSimpan").click(function(){
                                    icon: 'success'
                                  });
                                  $("#itemKasir > tr").empty();
+                                 $("#cboMetode").val("");
                                  itemArray = [];
                                  calc_total();
                             }

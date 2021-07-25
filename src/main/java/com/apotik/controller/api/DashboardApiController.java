@@ -1,6 +1,6 @@
 package com.apotik.controller.api;
 
-import com.apotik.service.OrderService;
+import com.apotik.service.order.OrderService;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

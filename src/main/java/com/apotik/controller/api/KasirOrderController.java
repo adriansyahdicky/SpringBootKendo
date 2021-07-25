@@ -1,21 +1,17 @@
 package com.apotik.controller.api;
 
-import com.apotik.dto.KasirOrderDTO;
+import com.apotik.dto.kasir.KasirOrderDTO;
 import com.apotik.entity.Orders;
-import com.apotik.entity.Pembelian;
-import com.apotik.service.KasirService;
-import com.apotik.service.OrderService;
-import com.apotik.utils.ErrorUtils;
+import com.apotik.service.kasir.KasirService;
+import com.apotik.service.order.OrderService;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 

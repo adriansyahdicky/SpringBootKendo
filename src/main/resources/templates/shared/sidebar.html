@@ -19,7 +19,7 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">APOTIK MENU</li>
+                <li class="header">POS MENU</li>
                 <li><a th:href="@{'/dashboard'}"><i class="fa fa-dashboard"></i> <span>Home</span></a></li>
 
                 <li th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="treeview">
@@ -32,10 +32,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a th:href="@{'/user'}"><i class="fa fa-circle-o"></i> User</a></li>
-                        <li><a th:href="@{'/kategori'}"><i class="fa fa-circle-o"></i> Kategori</a></li>
-                        <li><a th:href="@{'/obat'}"><i class="fa fa-circle-o"></i> Barang</a></li>
-                        <li><a th:href="@{'/supplier'}"><i class="fa fa-circle-o"></i> Supplier</a></li>
-                        <li><a th:href="@{'/rak'}"><i class="fa fa-circle-o"></i> Lokasi</a></li>
+                        <li><a th:href="@{'/menu'}"><i class="fa fa-circle-o"></i> Menu</a></li>
+                        <li><a th:href="@{'/bahanbaku'}"><i class="fa fa-circle-o"></i> Bahan Baku</a></li>
+                        <li><a th:href="@{'/history'}"><i class="fa fa-circle-o"></i> History</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -49,7 +48,7 @@
                     <ul class="treeview-menu">
                             <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{'/requestbarang'}"><i class="fa fa-circle-o"></i>Request Barang</a></li>
                             <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{'/barangkeluarlist'}"><i class="fa fa-circle-o"></i>Barang Masuk</a></li>
-                            <li th:if="${#request.isUserInRole('ROLE_KASIR')}"><a th:href="@{'/barangkeluar'}"><i class="fa fa-circle-o"></i> Barang Keluar</a></li>
+                            <li th:if="${#request.isUserInRole('ROLE_KASIR')}"><a th:href="@{'/barangkeluar'}"><i class="fa fa-circle-o"></i> Kasir </a></li>
                     </ul>
                 </li>
                 <li class="treeview">

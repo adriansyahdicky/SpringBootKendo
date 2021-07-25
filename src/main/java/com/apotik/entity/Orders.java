@@ -29,6 +29,9 @@ public class Orders {
     @Column(name = "total_price")
     private double totalPrice;
 
+    @Column(name = "metode_pembayaran")
+    private String metodePembayaran;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

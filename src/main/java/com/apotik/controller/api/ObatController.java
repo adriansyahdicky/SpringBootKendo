@@ -1,10 +1,10 @@
 package com.apotik.controller.api;
 
-import com.apotik.dto.ObatCreateDTO;
-import com.apotik.dto.ObatUpdateDTO;
-import com.apotik.dto.ReturnSearch;
+import com.apotik.dto.barang.ObatCreateDTO;
+import com.apotik.dto.barang.ObatUpdateDTO;
+import com.apotik.dto.other.ReturnSearch;
 import com.apotik.entity.Obat;
-import com.apotik.service.ObatService;
+import com.apotik.service.barang.ObatService;
 import com.apotik.utils.ErrorUtils;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

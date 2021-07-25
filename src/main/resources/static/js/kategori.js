@@ -2,6 +2,7 @@ var parameter;
 
 $(document).ready(function () {
         getKategoris();
+        cobaTes();
         $('.select2').select2();
 
         parameter = {
@@ -10,6 +11,18 @@ $(document).ready(function () {
              satuan : null
         }
 })
+
+function cobaTes(){
+    var url = get_uri() + '/api/kategori/tes';
+    $.ajax({
+            type:"GET",
+            url:url,
+            contentType:"application/json",
+            success:function(data){
+                console.log("ola"+data)
+            }
+        })
+}
 
 function getKategoris(){
     var url = get_uri() + '/api/kategori/getKategoris';
@@ -145,11 +158,9 @@ function deleteKategori(id) {
                     type: "POST",
                     url: get_uri() + "/api/kategori/deleteKategori/" + id,
                     success: function (data) {
-                        debugger;
                         var obj = JSON.parse(data);
                         swal("Message", obj.status, "success").then((value) => {
                             if (value) {
-                                 debugger;
                                  $("#tblKategori").DataTable().ajax.reload();
                             }
                         });

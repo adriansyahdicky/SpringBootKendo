@@ -1,10 +1,10 @@
 package com.apotik.controller.api;
 
-import com.apotik.dto.*;
-import com.apotik.entity.Kategori;
+import com.apotik.dto.other.ReturnSearch;
+import com.apotik.dto.rak.RakCreateDTO;
+import com.apotik.dto.rak.RakUpdateDTO;
 import com.apotik.entity.Rak;
-import com.apotik.service.KategoriService;
-import com.apotik.service.RakService;
+import com.apotik.service.rak.RakService;
 import com.apotik.utils.ErrorUtils;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

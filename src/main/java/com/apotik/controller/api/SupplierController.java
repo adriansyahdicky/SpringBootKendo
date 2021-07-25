@@ -1,16 +1,14 @@
 package com.apotik.controller.api;
 
-import com.apotik.dto.ObatCreateDTO;
-import com.apotik.dto.ReturnSearch;
-import com.apotik.dto.SupplierCreateDTO;
-import com.apotik.dto.SupplierUpdateDTO;
+import com.apotik.dto.other.ReturnSearch;
+import com.apotik.dto.supplier.SupplierCreateDTO;
+import com.apotik.dto.supplier.SupplierUpdateDTO;
 import com.apotik.entity.Supplier;
-import com.apotik.service.SupplierService;
+import com.apotik.service.supplier.SupplierService;
 import com.apotik.utils.ErrorUtils;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,6 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/supplier")

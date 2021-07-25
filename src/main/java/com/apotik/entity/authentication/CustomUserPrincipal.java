@@ -34,6 +34,10 @@ public class CustomUserPrincipal implements UserDetails {
         this.rolesAuthorities = rolesAuthorities;
     }
 
+    public CustomUserPrincipal() {
+
+    }
+
     public static CustomUserPrincipal create(User user){
         List<GrantedAuthority> roles = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

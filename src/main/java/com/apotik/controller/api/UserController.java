@@ -1,9 +1,8 @@
 package com.apotik.controller.api;
 
-import com.apotik.dto.UserRegistrationDTO;
-import com.apotik.entity.Obat;
+import com.apotik.dto.user.UserRegistrationDTO;
 import com.apotik.entity.User;
-import com.apotik.service.UserService;
+import com.apotik.service.user.UserService;
 import com.apotik.utils.ErrorUtils;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

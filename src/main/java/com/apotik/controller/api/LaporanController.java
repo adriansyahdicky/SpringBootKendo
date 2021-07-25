@@ -1,8 +1,7 @@
 package com.apotik.controller.api;
 
 import com.apotik.entity.Obat;
-import com.apotik.entity.Supplier;
-import com.apotik.service.ObatService;
+import com.apotik.service.barang.ObatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

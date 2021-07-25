@@ -1,6 +1,5 @@
 package com.apotik.repository;
 
-import com.apotik.dto.ReturnSearch;
 import com.apotik.entity.Kategori;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
