@@ -64,6 +64,19 @@ public class MenuService {
     }
 
 
+    public List<ReturnSearch> findMenuByName(String q) {
+        List<Menu> menus = menuRepository.findByNama(q);
 
+        List<ReturnSearch> search= new ArrayList<>();
+
+        for(Menu o : menus){
+            ReturnSearch returnSearch = new ReturnSearch();
+            returnSearch.setId(o.getId());
+            returnSearch.setText(o.getNamaMenu() + " - " + o.getHarga());
+            search.add(returnSearch);
+        }
+
+        return  search;
+    }
 
 }

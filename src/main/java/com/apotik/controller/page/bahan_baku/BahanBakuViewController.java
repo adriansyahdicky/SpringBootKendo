@@ -13,4 +13,11 @@ public class BahanBakuViewController {
         view.setViewName("page/bahanbaku/index");
         return view;
     }
+
+    @RequestMapping(value = "/laporanbahanbaku", method = RequestMethod.GET)
+    public ModelAndView laporanbahanbaku(){
+        ModelAndView view = new ModelAndView();
+        view.setViewName("page/bahanbaku/laporan");
+        return view;
+    }
 }

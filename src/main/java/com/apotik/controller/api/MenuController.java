@@ -88,5 +88,15 @@ public class MenuController {
 
     }
 
+    @GetMapping(value = "/searchMenuByName")
+    public List<ReturnSearch> searchMenuByName(String q) throws Exception {
+
+        try{
+            return menuService.findMenuByName(q);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
 }

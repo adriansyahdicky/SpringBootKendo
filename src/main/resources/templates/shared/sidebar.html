@@ -37,7 +37,7 @@
                         <li><a th:href="@{'/history'}"><i class="fa fa-circle-o"></i> History</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li th:if="${#request.isUserInRole('ROLE_KASIR')}" class="treeview">
                     <a href="#">
                         <i class="fa fa-edit"></i>
                         <span>Transaksi</span>
@@ -46,12 +46,10 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                            <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{'/requestbarang'}"><i class="fa fa-circle-o"></i>Request Barang</a></li>
-                            <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{'/barangkeluarlist'}"><i class="fa fa-circle-o"></i>Barang Masuk</a></li>
-                            <li th:if="${#request.isUserInRole('ROLE_KASIR')}"><a th:href="@{'/barangkeluar'}"><i class="fa fa-circle-o"></i> Kasir </a></li>
+                            <li ><a th:href="@{'/transaksi'}"><i class="fa fa-circle-o"></i> Kasir </a></li>
                     </ul>
                 </li>
-                <li class="treeview">
+                <li th:if="${#request.isUserInRole('ROLE_ADMIN')}" class="treeview">
                     <a href="#">
                         <i class="fa fa-edit"></i>
                         <span>Laporan</span>
@@ -60,9 +58,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a th:href="@{'/stockobat'}"><i class="fa fa-circle-o"></i>Laporan Stock Barang</a></li>
-                        <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{'/laporanbarangmasuklist'}"><i class="fa fa-circle-o"></i>Laporan Barang Masuk</a></li>
-                        <li th:if="${#request.isUserInRole('ROLE_ADMIN')}"><a th:href="@{'/laporanbarangkeluarlist'}"><i class="fa fa-circle-o"></i>Laporan Barang Keluar</a></li>
+                        <li ><a th:href="@{'/laporanbahanbaku'}"><i class="fa fa-circle-o"></i>Laporan Bahan Baku</a></li>
                     </ul>
                 </li>
 

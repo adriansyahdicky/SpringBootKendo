@@ -14,7 +14,7 @@ public class TransaksiController {
     @Autowired
     private TransaksiService transaksiService;
 
-    @PostMapping(value = "/saveTransaksi")
+    @PostMapping(value = "/api/transaksi/saveTransaksi")
     public String saveTransaksi(@RequestBody TransaksiDto transaksiDto) throws Exception {
 
         JSONObject jsonObject = new JSONObject();

@@ -10,6 +10,8 @@ import com.apotik.repository.BahanBakuRepository;
 import com.apotik.service.history.HistoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,6 +33,10 @@ public class BahanBakuService {
 
     public List<BahanBaku> getBahanBakus(){
         return bahanBakuRepository.findAll();
+    }
+
+    public Page<BahanBaku> getBahanBakusGrid(Pageable pageable){
+        return bahanBakuRepository.findAll(pageable);
     }
 
     public BahanBaku getBahanBakuById(Long id){
